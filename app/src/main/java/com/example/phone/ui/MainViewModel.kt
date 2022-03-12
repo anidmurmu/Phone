@@ -1,10 +1,8 @@
-package com.example.ui
+package com.example.phone.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.phone.domain.model.dummy.DummyUiModel
-import com.example.phone.domain.usecase.dummy.GetDummyDataUseCase
 import com.example.phone.domain.usecase.movie.GetPopularMovieListUseCase
 import com.example.phone.domain.usecase.movie.GetPopularMovieListUseCaseImpl
 import com.example.phone.ui.MainViewState
@@ -19,32 +17,15 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
-    private val getDummyDataUseCase: GetDummyDataUseCase,
     private val getPopularMovieListUseCase: GetPopularMovieListUseCase
 ) : ViewModel() {
 
     init {
-        getDummyData()
     }
 
     private val _viewState: MutableStateFlow<MainViewState> =
         MutableStateFlow(MainViewState.Initial)
     val viewState: StateFlow<MainViewState> = _viewState.asStateFlow()
-
-    fun getDummyData() {
-        var result = DummyUiModel("key", "errorResult")
-        viewModelScope.launch(dispatcherProvider.io) {
-            getDummyDataUseCase.getDummyData()
-                .onSuccess {
-                    result = result.copy(dummyValue = it.dummyValue)
-                    _viewState.value = MainViewState.Success(result.dummyValue)
-                }
-                .onFailure {
-                    Log.e("apple", it.toString())
-                    _viewState.value = MainViewState.Failure
-                }
-        }
-    }
 
     fun getPopularMovieList() {
         viewModelScope.launch(dispatcherProvider.io) {

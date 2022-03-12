@@ -1,12 +1,8 @@
 package com.example.phone.data.repositoryimpl.movie.di
 
-import com.example.phone.data.mapper.DummyMapper
 import com.example.phone.data.mapper.movie.MovieMapper
-import com.example.phone.data.repositoryimpl.DummyRepositoryImpl
 import com.example.phone.data.repositoryimpl.movie.MovieRepositoryImpl
-import com.example.phone.data.source.dummy.DummySrc
 import com.example.phone.data.source.network.retrofit.movie.MovieSrc
-import com.example.phone.domain.repository.DummyRepository
 import com.example.phone.domain.repository.movie.MovieRepository
 import dagger.Module
 import dagger.Provides

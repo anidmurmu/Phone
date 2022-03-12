@@ -1,6 +1,5 @@
 package com.example.phone.data.mapper.movie
 
-import com.example.phone.data.entity.DummySrcModel
 import com.example.phone.data.entity.movie.MovieInfoNetworkModel
 import com.example.phone.data.entity.movie.NetworkResp
 import com.example.phone.domain.mapper.Mapper
