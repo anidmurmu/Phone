@@ -1,6 +1,6 @@
 package com.example.phone.data.source.network.retrofit.utils
 
-import com.example.phone.data.source.network.retrofit.sensor.MovieService
+import com.example.phone.data.source.network.retrofit.movie.MovieService
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides

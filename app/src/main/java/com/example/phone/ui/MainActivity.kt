@@ -21,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         val dummyTextView = findViewById<TextView>(R.id.tvDummyText)
+
+        viewModel.getPopularMovieList()
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.phone.domain.model.dummy.DummyUiModel
 import com.example.phone.domain.usecase.dummy.GetDummyDataUseCase
+import com.example.phone.domain.usecase.movie.GetPopularMovieListUseCase
+import com.example.phone.domain.usecase.movie.GetPopularMovieListUseCaseImpl
 import com.example.phone.ui.MainViewState
 import com.example.phone.ui.dispatcher.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
-    private val getDummyDataUseCase: GetDummyDataUseCase
+    private val getDummyDataUseCase: GetDummyDataUseCase,
+    private val getPopularMovieListUseCase: GetPopularMovieListUseCase
 ) : ViewModel() {
 
     init {
@@ -40,6 +43,12 @@ class MainViewModel @Inject constructor(
                     Log.e("apple", it.toString())
                     _viewState.value = MainViewState.Failure
                 }
+        }
+    }
+
+    fun getPopularMovieList() {
+        viewModelScope.launch(dispatcherProvider.io) {
+            getPopularMovieListUseCase.getPopularMovieList()
         }
     }
 }
