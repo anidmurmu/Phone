@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.phone.R
+import com.example.phone.databinding.ActivityMainBinding
+import com.example.phone.ui.utils.base.RVModelBindingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -16,12 +19,21 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
+        binding.rvMovieList.adapter = RVModelBindingAdapter(
+            emptyList(),
+            viewModel,
+            MovieVHFactory()
+        )
 
-        val dummyTextView = findViewById<TextView>(R.id.tvDummyText)
 
         viewModel.getPopularMovieList()
 
@@ -32,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                         is MainViewState.Initial -> {
                         }
                         is MainViewState.Success -> {
-                            dummyTextView.text = uiState.str
                         }
                         is MainViewState.Failure -> {
 

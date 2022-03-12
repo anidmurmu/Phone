@@ -11,7 +11,7 @@
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMotorList"
+        android:id="@+id/rvMovieList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:data="@{viewModel.viewState.movieList}"
@@ -22,6 +22,4 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_movie"
         app:layout_constraintVertical_bias="0"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

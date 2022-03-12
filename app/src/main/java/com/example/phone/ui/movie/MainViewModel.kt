@@ -1,11 +1,13 @@
 package com.example.phone.ui.movie
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.phone.domain.model.response.Response
 import com.example.phone.domain.usecase.movie.GetPopularMovieListUseCase
 import com.example.phone.ui.dispatcher.DispatcherProvider
+import com.example.phone.ui.utils.base.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,9 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
+    application: Application,
     private val dispatcherProvider: DispatcherProvider,
     private val getPopularMovieListUseCase: GetPopularMovieListUseCase
-) : ViewModel() {
+) : BaseViewModel(application) {
 
     init {
     }
